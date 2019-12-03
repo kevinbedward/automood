@@ -1,0 +1,251 @@
+
+<html>
+   <head>
+      <style type="text/css">
+         .sikuli-code {
+            font-size: 20px;
+            font-family: "Osaka-mono", Monospace;
+            line-height: 1.5em;
+            display:table-cell;
+            white-space: pre-wrap;       /* css-3 */
+            white-space: -moz-pre-wrap !important;  /* Mozilla, since 1999 */
+            white-space: -pre-wrap;      /* Opera 4-6 */
+            white-space: -o-pre-wrap;    /* Opera 7 */
+            word-wrap: break-word;       /* Internet Explorer 5.5+ */
+            width: 99%;   /* remove horizontal scroll-bar when viewing in IE7 */
+         }
+         .sikuli-code img {
+            vertical-align: middle;
+            margin: 2px;
+            border: 1px solid #ccc;
+            padding: 2px;
+            -moz-border-radius: 5px;
+            -webkit-border-radius: 5px;
+            -moz-box-shadow: 1px 1px 1px gray;
+            -webkit-box-shadow: 1px 1px 2px gray;
+         }
+         .kw {
+            color: blue;
+         }
+         .skw {
+            color: rgb(63, 127, 127);
+         }
+
+         .str {
+            color: rgb(128, 0, 0);
+         }
+
+         .dig {
+            color: rgb(128, 64, 0);
+         }
+
+         .cmt {
+            color: rgb(200, 0, 200);
+         }
+
+         h2 {
+            display: inline;
+            font-weight: normal;
+         }
+
+         .info {
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
+            margin-bottom: 20px;
+            display: none;
+         }
+
+         a {
+            color: #9D2900;
+         }
+
+         body {
+            font-family: "Trebuchet MS", Arial, Sans-Serif;
+         }
+
+      </style>
+   </head>
+<body>
+<div class="info">
+<h2>sqatest.sikuli</h2> <a href="sqatest.zip">(Download this script)</a>
+</div>
+<pre class="sikuli-code">
+<span class="kw">from</span> sikuli <span class="kw">import</span> *
+Settings.OcrTextSearch=True
+Settings.OcrTextRead = True
+<span class="kw">import</span> os
+<span class="kw">import</span> time
+now = time.strftime(<span class="str">'%d'</span>)
+directory = (<span class="str">'/tmp'</span>)
+logs = (<span class="str">'/tmp/errorlogs'</span>)
+
+
+
+<span class="kw">def</span> errorLogs():
+    <span class="kw">if</span> <span class="kw">not</span> os.path.exists(directory):
+        os.makedirs(directory)
+    <span class="kw">if</span> <span class="kw">not</span> os.path.exists(logs):
+        os.makedirs(logs)
+
+<span class="kw">def</span> outputErrorMessage(message):
+    my_dir = <span class="str">"c:\\tmp\\errorlogs\\"</span>
+    el = <span class="str">"\n"</span>
+    my_file=file(my_dir + <span class="str">"ERRORS.txt"</span> , <span class="str">"a"</span>)<span class="cmt">#open a file. r,w,a a here is append</span>
+    my_file.write(message+el)
+    my_file.close()
+outputErrorMessage(<span class="str">"Test Started: "</span> + time.strftime(<span class="str">'%d/%m/%Y'</span>))
+<span class="kw">def</span> checkTabs():
+    <span class="kw">if</span> exists(<span class="str">"repmanfiletab.PNG"</span>):
+        <span class="skw">click</span>(<span class="str">"repmanfiletab.PNG"</span>)
+    <span class="kw">else</span>:
+        outputErrorMessage(<span class="str">"Repository Manager File tab missing."</span>)
+
+    <span class="kw">if</span> exists(<span class="str">"repmanrepositoriestab.PNG"</span>):
+        <span class="skw">click</span>(<span class="str">"repmanrepositoriestab.PNG"</span>)
+    <span class="kw">else</span>:
+        outputErrorMessage(<span class="str">"Repository Manager Repositories tab missing."</span>)
+
+    <span class="kw">if</span> exists(<span class="str">"repmanservertab.PNG"</span>):
+        <span class="skw">click</span>(<span class="str">"repmanservertab.PNG"</span>)
+    <span class="kw">else</span>:
+        outputErrorMessage(<span class="str">"Repository Manager - Servers tab missing."</span>)
+
+    <span class="kw">if</span> exists(<span class="str">"existingsqlserver.PNG"</span>):
+        <span class="skw">click</span>(<span class="str">"existingsqlserver.PNG"</span>)
+        <span class="skw">click</span>(<span class="str">"repmanMakeDefaultButton.PNG"</span>)
+    <span class="kw">else</span>:
+        <span class="skw">click</span>(<span class="str">"repmanaddserverbutton.PNG"</span>)
+
+    <span class="kw">if</span> exists(<span class="str">"addServerNameField.PNG"</span>):
+        <span class="skw">type</span>(<span class="str">"DESKTOP-I2L5R4O\SQLL2014"</span>)
+        <span class="skw">click</span>(<span class="str">"nativeSQLcheckBox.PNG"</span>)
+        <span class="skw">type</span>(Key.TAB)
+        <span class="skw">type</span>(<span class="str">"sa"</span>)
+        <span class="skw">type</span>(Key.TAB)
+        <span class="skw">type</span>(<span class="str">"Ts0rg123"</span>)
+        <span class="skw">click</span>(<img src="1573733037264.png" />)
+
+
+    <span class="kw">if</span> exists(<span class="str">"authenticationfield"</span>):
+        <span class="skw">type</span>(<span class="str">"sa"</span> + Key.TAB)
+        <span class="skw">type</span>(<span class="str">"Ts0rg123"</span>)
+        <span class="skw">click</span>(<span class="str">"authcheck.PNG"</span>)
+        <span class="skw">click</span>(<span class="str">"authstorecredentials.PNG"</span>)
+        <span class="skw">click</span>(<img src="1573733149343.png" />)
+        <span class="skw">click</span>(<span class="str">"repmanMakeDefaultButton.PNG"</span>)
+    <span class="kw">else</span>:
+        outputErrorMessage(<span class="str">"SQL Server created. Continuing test."</span>)
+
+<span class="kw">def</span> addRep():
+    <span class="kw">if</span> exists(<span class="str">"repmanCreateRepOnServer.PNG"</span>):
+        <span class="skw">click</span>(<span class="str">"repmanCreateRepOnServer.PNG"</span>)
+    <span class="kw">else</span>:
+        outputErrorMessage(<span class="str">"Repository Manager - Create Repository on server button missing."</span>)
+
+    <span class="kw">if</span> exists(<span class="str">"repositorynamefield.PNG"</span>):
+        <span class="skw">type</span>(<span class="str">"MooD Test"</span>)
+        <span class="skw">type</span>(Key.TAB + Key.TAB + Key.TAB + Key.TAB + Key.TAB + Key.BACKSPACE + Key.BACKSPACE)
+        <span class="skw">type</span>(<span class="str">"sa"</span> + Key.TAB)
+        <span class="skw">type</span>(<span class="str">"Ts0rg123"</span>)
+        <span class="skw">click</span>(<span class="str">"createbutton.PNG"</span>)
+        <span class="skw">wait</span>(<span class="dig">4</span>)
+
+<span class="kw">def</span> openCreatedRepository():
+    <span class="skw">doubleClick</span>(<span class="str">"repicon.PNG"</span>)
+    <span class="skw">click</span>(<span class="str">"openbarep.PNG"</span>)
+    <span class="skw">wait</span>(<span class="dig">4</span>)
+    <span class="skw">wait</span>(<span class="str">"bawelcomeshowstatusoflastconnection.PNG"</span>)
+
+<span class="kw">def</span> configureManageThemes():
+    <span class="skw">click</span>(<span class="str">"openmanagethemes.PNG"</span>)
+    <span class="skw">click</span>(<span class="str">"clickthemesoption.PNG"</span>)
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+    <span class="skw">click</span>(<img src="1574094695930.png" />)
+    <span class="skw">click</span>(<span class="str">"managethemestandardrelationships.PNG"</span>)
+    <span class="skw">click</span>(<span class="str">"newstandardrelationshiptype.PNG"</span>)
+    <span class="skw">type</span>(<span class="str">"process to many"</span> + Key.TAB)
+    <span class="skw">click</span>(<span class="str">"canrelateto.PNG"</span>)
+    <span class="skw">click</span>(<span class="str">"tickcanrelatetoprocess.PNG"</span>)
+    <span class="skw">click</span>(<span class="str">"tickprocessactivity.PNG"</span>)
+    <span class="skw">click</span>(<span class="str">"tickcanrelatetomanyelements.PNG"</span>)
+    <span class="skw">click</span>(<span class="str">"selectmanagethemesThemestab.PNG"</span>)
+    <span class="skw">click</span>(<span class="str">"expandprocesstheme.PNG"</span>)
+    <span class="skw">click</span>(<span class="str">"managethemeselectprocess.PNG"</span>)
+    <span class="skw">click</span>(<span class="str">"processdefinitiontab.PNG"</span>)
+    <span class="skw">click</span>(<span class="str">"definitionrelationshiptab.PNG"</span>)
+    <span class="skw">click</span>(<span class="str">"setrelationshipcreated.PNG"</span>)
+    <span class="skw">click</span>(<span class="str">"managethemesokclosebutton.PNG"</span>)
+
+<span class="cmt">#def createProcess(name, parent=None):</span>
+<span class="cmt">#    if parent is None:</span>
+        <span class="cmt"># add the new process to the Processes theme directly</span>
+<span class="cmt">#        click(Pattern("Explorer Tree Processes-1.png").targetOffset(59,-3)) # click to the right so the tooltip does not get in the way</span>
+<span class="cmt">#    else:</span>
+        <span class="cmt"># use OCR to select the parent process</span>
+<span class="cmt">#        textRegion = findText(parent)</span>
+<span class="cmt">#        click(textRegion)</span>
+<span class="cmt">#    type("n", Key.CTRL)</span>
+<span class="cmt">#    type(name)</span>
+
+<span class="cmt"># Example create a Process with ten children</span>
+<span class="cmt">#createProcess("Parent")</span>
+<span class="cmt">#for i in range(1,2):</span>
+<span class="cmt">#    createProcess("Child%d" % i, "Parent")</span>
+<span class="cmt">#    wait(0.03)</span>
+<span class="cmt">#outputErrorMessage("New processes created")</span>
+
+<span class="kw">def</span> ProcessModel():
+    <span class="skw">doubleClick</span>(<span class="str">"parentProcess.PNG"</span>)
+    <span class="skw">click</span>(<span class="str">"pcmSymbol.PNG"</span>)
+    <span class="skw">click</span>(<span class="str">"ribbonSizeOption.PNG"</span>)
+    <span class="skw">click</span>(<span class="str">"sizeMore.PNG"</span>)
+    <span class="skw">doubleClick</span>(<span class="str">"processmodelformatstylesizewidth.PNG"</span>)
+    <span class="skw">type</span>(<span class="str">"100"</span> + Key.TAB + <span class="str">"100"</span>)
+    <span class="skw">click</span>(<span class="str">"formatstyleokbutton.PNG"</span>)
+    <span class="skw">dragDrop</span>(Location(Location(<span class="dig">1231</span>, <span class="dig">529</span>)), Location(Location(<span class="dig">916</span>, <span class="dig">295</span>)))
+
+
+<span class="kw">def</span> openActionsMenu():
+    <span class="skw">click</span>(<span class="str">"ribbonactionsmenu.PNG"</span>)
+    <span class="skw">click</span>(<span class="str">"formattedtexteditor.PNG"</span>)
+    <span class="skw">click</span>(Location(<span class="dig">1261</span>, <span class="dig">345</span>))
+    <span class="skw">click</span>(<span class="str">"fteditorclicktoselect.PNG"</span>)
+    <span class="skw">click</span>(<span class="str">"fields.PNG"</span>)
+    <span class="skw">click</span>(<span class="str">"datanavigatorformattedtextfield.PNG"</span>)
+    <span class="skw">click</span>(<span class="str">"datanavigatorpurpose.PNG"</span>)
+    <span class="skw">click</span>(<span class="str">"fteokbutton.PNG"</span>)
+    <span class="skw">click</span>(<span class="str">"ribbonfilebutton.PNG"</span>)
+    <span class="skw">click</span>(<span class="str">"ribbonsaveall.PNG"</span>)
+
+<span class="kw">def</span> cleanUp():
+    <span class="skw">rightClick</span>(<span class="str">"parent2delete.PNG"</span>)
+    <span class="skw">click</span>(<span class="str">"deleteProcess.PNG"</span>)
+    <span class="skw">type</span>(Key.TAB + Key.ENTER)
+    <span class="skw">type</span>(Key.TAB + Key.TAB + Key.TAB + Key.ENTER)
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="cmt">#App.open(r"C:\Program Files (x86)\MooD\16\RepositoryManager.exe")</span>
+setBundlePath(<span class="str">r"C:\sikuli\rep-man-images"</span>)
+<span class="skw">wait</span>(<span class="dig">3</span>)
+<span class="cmt">#errorLogs()</span>
+<span class="cmt">#outputErrorMessage('End of Line....')</span>
+<span class="cmt">#checkTabs()</span>
+<span class="cmt">#addRep()</span>
+<span class="cmt">#openCreatedRepository()</span>
+<span class="cmt">#configureManageThemes()</span>
+<span class="cmt">#ProcessModel()</span>
+<span class="cmt">#openActionsMenu()</span>
+cleanUp()
+</pre>
+</body>
+</html>
